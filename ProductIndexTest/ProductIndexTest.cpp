@@ -16,7 +16,7 @@ static int testsFailed = 0;
 #define TEST(name) void name()
 #define RUN_TEST(name) runTest(#name, name)
 
-void runTest(const char* name, void (*testFunc)()) {
+static void runTest(const char* name, void (*testFunc)()) {
     testsRun++;
     std::cout << "Running: " << name << "... ";
     try {
@@ -43,7 +43,7 @@ void runTest(const char* name, void (*testFunc)()) {
 #define ASSERT_EQ(a, b) \
     if ((a) != (b)) throw std::runtime_error("Assertion failed: " #a " == " #b)
 
-void removeFile(const char* filename) {
+static void removeFile(const char* filename) {
     std::remove(filename);
 }
 
@@ -51,7 +51,7 @@ void removeFile(const char* filename) {
 // Tests
 // =============================================================================
 
-TEST(test_create_and_build) {
+static TEST(test_create_and_build) {
     const char* filename = "test_create.dat";
     removeFile(filename);
 
@@ -65,7 +65,7 @@ TEST(test_create_and_build) {
     removeFile(filename);
 }
 
-TEST(test_lookup) {
+static TEST(test_lookup) {
     const char* filename = "test_lookup.dat";
     removeFile(filename);
 
@@ -99,7 +99,7 @@ TEST(test_lookup) {
     removeFile(filename);
 }
 
-TEST(test_contains_record) {
+static TEST(test_contains_record) {
     const char* filename = "test_contains.dat";
     removeFile(filename);
 
@@ -122,7 +122,7 @@ TEST(test_contains_record) {
     removeFile(filename);
 }
 
-TEST(test_many_records) {
+static TEST(test_many_records) {
     const char* filename = "test_many.dat";
     removeFile(filename);
 
@@ -162,7 +162,7 @@ TEST(test_many_records) {
     removeFile(filename);
 }
 
-TEST(test_build_then_search_same_instance) {
+static TEST(test_build_then_search_same_instance) {
     const char* filename = "test_same_instance.dat";
     removeFile(filename);
 

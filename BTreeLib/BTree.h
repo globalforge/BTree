@@ -22,11 +22,13 @@
  */
 
 // MSVC compatibility
+/*
 #ifdef _MSC_VER
     #define _CRT_SECURE_NO_WARNINGS
     #pragma warning(push)
     #pragma warning(disable: 4996)  // strncpy deprecation
 #endif
+*/
 
 #include <fstream>
 #include <cstring>
@@ -70,7 +72,7 @@ public:
         Record(const char* k, const char* d) {
             std::memset(key, 0, KeySize);
             std::memset(data, 0, DataSize);
-            if (k) std::strncpy(key, k, KeySize - 1);
+            if (k) strncpy_s(key, KeySize, k, KeySize - 1);
             if (d) std::memcpy(data, d, DataSize);
         }
 
@@ -210,7 +212,7 @@ public:
         }
 
         Record record;
-        std::strncpy(record.key, key, KeySize - 1);
+        strncpy_s(record.key, KeySize, key, KeySize - 1);
         std::memcpy(record.data, data, DataSize);
 
         bool moveUp = false;
@@ -271,7 +273,7 @@ public:
 
         char searchKey[KeySize];
         std::memset(searchKey, 0, KeySize);
-        std::strncpy(searchKey, key, KeySize - 1);
+        strncpy_s(searchKey, KeySize, key, KeySize - 1);
 
         long current = root_;
         int location;
@@ -504,6 +506,8 @@ private:
     }
 };
 
+/*
 #ifdef _MSC_VER
     #pragma warning(pop)
 #endif
+*/

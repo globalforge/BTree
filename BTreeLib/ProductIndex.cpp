@@ -11,7 +11,7 @@ ProductRecord::ProductRecord() : nodeKey(0) {
 ProductRecord::ProductRecord(const std::string& id, int64_t key) : nodeKey(key) {
     memset(productId, 0, MAX_PRODUCT_ID_LEN);
     // Copy up to MAX_PRODUCT_ID_LEN - 1 characters to ensure null termination
-    strncpy(productId, id.c_str(), MAX_PRODUCT_ID_LEN - 1);
+    strncpy_s(productId, MAX_PRODUCT_ID_LEN, id.c_str(), MAX_PRODUCT_ID_LEN - 1);
 }
 
 bool ProductRecord::operator<(const ProductRecord& other) const {
@@ -102,7 +102,7 @@ bool ProductIndex::lookup(const std::string& productId, int64_t& outNodeKey) {
     // Prepare the search key (padded with nulls)
     char targetId[MAX_PRODUCT_ID_LEN];
     memset(targetId, 0, MAX_PRODUCT_ID_LEN);
-    strncpy(targetId, productId.c_str(), MAX_PRODUCT_ID_LEN - 1);
+    strncpy_s(targetId, MAX_PRODUCT_ID_LEN, productId.c_str(), MAX_PRODUCT_ID_LEN - 1);
     
     return binarySearch(targetId, outNodeKey);
 }

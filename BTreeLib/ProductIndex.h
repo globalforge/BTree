@@ -1,11 +1,13 @@
 #pragma once
 
 // MSVC compatibility
+/*
 #ifdef _MSC_VER
     #define _CRT_SECURE_NO_WARNINGS
     #pragma warning(push)
     #pragma warning(disable: 4996)  // strncpy deprecation
 #endif
+*/
 
 #include <string>
 #include <vector>
@@ -74,6 +76,8 @@ private:
     bool binarySearch(const char* targetId, int64_t& outNodeKey);
 };
 
+/*
 #ifdef _MSC_VER
     #pragma warning(pop)
 #endif
+*/
